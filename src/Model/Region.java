@@ -1,28 +1,22 @@
 package Model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Region {
+    @JsonProperty("id")
     private String id;
+
+    @JsonProperty("name")
     private String name;
-    private Region parentRegion;
-    private float size;
 
-    public Region(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @JsonProperty("parent_region_id")
+    private String parentRegionId; // Antes era `parentRegion`
 
-    public Region(String id, String name, Region parentRegion) {
-        this.id = id;
-        this.name = name;
-        this.parentRegion = parentRegion;
-    }
+    @JsonProperty("size")
+    private Float size;
 
-    public Region(String id, String name, Region parentRegion, float size) {
-        this.id = id;
-        this.name = name;
-        this.parentRegion = parentRegion;
-        this.size = size;
+    public Region() {
     }
 
     public String getId() {
@@ -41,12 +35,12 @@ public class Region {
         this.name = name;
     }
 
-    public Region getParentRegion() {
-        return parentRegion;
+    public String getParentRegion() {
+        return parentRegionId;
     }
 
-    public void setParentRegion(Region parentRegion) {
-        this.parentRegion = parentRegion;
+    public void setParentRegion(String parentRegion) {
+        this.parentRegionId = parentRegion;
     }
 
     public float getSize() {

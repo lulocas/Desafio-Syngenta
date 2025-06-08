@@ -9,6 +9,9 @@ public class Pest {
         this.name = name;
     }
 
+    public Pest() {
+    }
+
     public String getId() {
         return id;
     }

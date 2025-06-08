@@ -1,37 +1,41 @@
 package Model;
 
-public class ProductThreshold {
-    private String id;
-    private int minimunOccurrences;
-    private float dosePerHectare;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public ProductThreshold(String id, int minimunOccurrences, float dosePerHectare) {
-        this.id = id;
-        this.minimunOccurrences = minimunOccurrences;
-        this.dosePerHectare = dosePerHectare;
+public class ProductThreshold {
+    @JsonProperty("pest_id") // Mapeia corretamente o campo do JSON
+    private String pestId;
+
+    @JsonProperty("minimum_occurrence") // Verifique o nome correto no JSON
+    private int minimumOccurrences;
+
+    @JsonProperty("dose_per_hectare") // Verifique o nome correto no JSON
+    private int dosePerHectare;
+
+    public ProductThreshold() {
     }
 
     public String getId() {
-        return id;
+        return pestId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.pestId = id;
     }
 
     public float getDosePerHectare() {
         return dosePerHectare;
     }
 
-    public void setDosePerHectare(float dosePerHectare) {
+    public void setDosePerHectare(int dosePerHectare) {
         this.dosePerHectare = dosePerHectare;
     }
 
-    public int getMinimunOccurrences() {
-        return minimunOccurrences;
+    public int getMinimumOccurrences() {
+        return minimumOccurrences;
     }
 
-    public void setMinimunOccurrences(int minimunOccurrences) {
-        this.minimunOccurrences = minimunOccurrences;
+    public void setMinimumOccurrences(int minimumOccurrences) {
+        this.minimumOccurrences = minimumOccurrences;
     }
 }

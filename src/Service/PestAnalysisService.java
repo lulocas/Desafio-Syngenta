@@ -1,67 +1,39 @@
 package Service;
 
-import Model.Pest;
-import Model.PestOccurrence;
-import Model.Region;
+import Model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PestAnalysisService {
-    private List<PestOccurrence> occurrences;
-    private List<Region> regions;
-    private List<Pest> pests;
+    public static void analyzePestOccurrences(List<PestOccurrence> pestOccurrences, List<Product> products, List<Region> regions) {
+        Map<String, Integer> pestCountByRegion = new HashMap<>();
 
-    public void analysisOccurrence(){
-        String name;
-        for(int i = 0; i < occurrences.size(); i++){
-            PestOccurrence occurrence = occurrences.get(i);
-            for(int j = 0; j < regions.size(); j++){
-                Region region = regions.get(j);
-                if(occurrence.getRegionId().equals(region.getId())){
-                    name = region.getName();
-                    analysisRegion(occurrence, name);
+        // Contar ocorrências de pragas por região
+        for (PestOccurrence occurrence : pestOccurrences) {
+            pestCountByRegion.put(String.valueOf(occurrence.getRegionId()), pestCountByRegion.getOrDefault(occurrence.getRegionId(), 0) + 1);
+        }
+
+        // Determinar quais produtos devem ser aplicados
+        for (Region region : regions) {
+            int pestCount = pestCountByRegion.getOrDefault(region.getId(), 0);
+            List<String> recommendedProducts = new ArrayList<>();
+
+            for (Product product : products) {
+                for (ProductThreshold threshold : product.getThresholds()) {
+                    if (pestCount >= threshold.getMinimumOccurrences()) {
+                        double dosage = threshold.getDosePerHectare() * region.getSize();
+                        double cost = dosage * product.getCostPerDose();
+                        recommendedProducts.add("Region: " + region.getName() + " - Product: " + product.getName() + " - Cost: " + cost + " - Dosage: " + dosage);
+                        break;
+                    }
                 }
             }
+
+            // Exibir recomendações para a região
+            recommendedProducts.forEach(System.out::println);
         }
-
-    }
-
-    public void analysisRegion(PestOccurrence occurrence, String name){
-        List<PestOccurrence> occurrencesRegion1 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion2 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion11 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion12 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion13= new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion14 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion21 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion22 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion23 = new ArrayList<>();
-        List<PestOccurrence> occurrencesRegion24 = new ArrayList<>();
-        if("Region 1".equals(name)){
-            occurrencesRegion1.add(occurrence);
-        }else if("Region 2".equals(name)){
-            occurrencesRegion2.add(occurrence);
-        }else if("Region 1/1".equals(name)){
-            occurrencesRegion11.add(occurrence);
-        }else if("Region 1/2".equals(name)){
-            occurrencesRegion12.add(occurrence);
-        }else if("Region 1/3".equals(name)){
-            occurrencesRegion13.add(occurrence);
-        }else if("Region 1/4".equals(name)){
-            occurrencesRegion14.add(occurrence);
-        }else if("Region 2/1".equals(name)){
-            occurrencesRegion21.add(occurrence);
-        }else if("Region 2/2".equals(name)){
-            occurrencesRegion22.add(occurrence);
-        }else if("Region 2/3".equals(name)){
-            occurrencesRegion23.add(occurrence);
-        }else if("Region 2/4".equals(name)){
-            occurrencesRegion24.add(occurrence);
-        }
-    }
-
-    public void analysisPest(){
-
     }
 }

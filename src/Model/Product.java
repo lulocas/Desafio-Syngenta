@@ -1,16 +1,24 @@
 package Model;
 
-public class Product {
-    private String id;
-    private String name;
-    private ProductThreshold[] thresholds;
-    private float costPerDose;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Product(String id, String name, ProductThreshold[] thresholds, float costPerDose) {
-        this.id = id;
-        this.name = name;
-        this.thresholds = thresholds;
-        this.costPerDose = costPerDose;
+import java.util.List;
+
+public class Product {
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("name")
+    private String name;
+
+    @JsonProperty("cost_per_dose")
+    private double costPerDose; // Antes o nome estava diferente
+
+    @JsonProperty("thresholds")
+    private List<ProductThreshold> thresholds;
+
+
+    public Product() {
     }
 
     public String getId() {
@@ -29,15 +37,15 @@ public class Product {
         this.name = name;
     }
 
-    public ProductThreshold[] getThresholds() {
+    public List<ProductThreshold> getThresholds() {
         return thresholds;
     }
 
-    public void setThresholds(ProductThreshold[] thresholds) {
+    public void setThresholds(List<ProductThreshold> thresholds) {
         this.thresholds = thresholds;
     }
 
-    public float getCostPerDose() {
+    public double getCostPerDose() {
         return costPerDose;
     }
 

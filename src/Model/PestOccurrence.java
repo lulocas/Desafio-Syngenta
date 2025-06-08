@@ -1,22 +1,32 @@
 package Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.stream.Location;
 import java.time.LocalDateTime;
 
 public class PestOccurrence {
+    @JsonProperty("id")
     private String id;
-    private Region regionId;
-    private Pest pestId;
-    private LocalDateTime createdAt;
+
+    @JsonProperty("region_id")  // Corrige o nome do campo JSON
+    private String regionId;
+
+    @JsonProperty("pest_id")
+    private String pestId;
+
+    @JsonProperty("created_at")
+    private String createdAt;
+
+    @JsonProperty("location")
     private Location location;
 
     public static class Location {
         private double latitude;
         private double longitude;
 
-        public Location(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
+        public Location() {
+
         }
 
         public double getLatitude() {
@@ -31,19 +41,12 @@ public class PestOccurrence {
     public PestOccurrence() {
     }
 
-    public PestOccurrence(String id, Region region, Pest pest, LocalDateTime createdAt, Location location) {
-        this.id = id;
-        this.regionId = region;
-        this.pestId = pest;
-        this.createdAt = createdAt;
-        this.location = location;
-    }
 
-    public Region getRegionId() {
+    public String getRegionId() {
         return regionId;
     }
 
-    public void setRegionId(Region region) {
+    public void setRegionId(String region) {
         this.regionId = region;
     }
 
@@ -55,19 +58,19 @@ public class PestOccurrence {
         this.id = id;
     }
 
-    public Pest getPestId() {
+    public String getPestId() {
         return pestId;
     }
 
-    public void setPestId(Pest pest) {
+    public void setPestId(String pest) {
         this.pestId = pest;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
