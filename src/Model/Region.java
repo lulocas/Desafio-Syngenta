@@ -11,7 +11,7 @@ public class Region {
     private String name;
 
     @JsonProperty("parent_region_id")
-    private String parentRegionId; // Antes era `parentRegion`
+    private String parentRegionId;
 
     @JsonProperty("size")
     private Float size;

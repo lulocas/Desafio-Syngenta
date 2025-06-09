@@ -3,13 +3,13 @@ package Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductThreshold {
-    @JsonProperty("pest_id") // Mapeia corretamente o campo do JSON
+    @JsonProperty("pest_id")
     private String pestId;
 
-    @JsonProperty("minimum_occurrence") // Verifique o nome correto no JSON
+    @JsonProperty("minimum_occurrence")
     private int minimumOccurrences;
 
-    @JsonProperty("dose_per_hectare") // Verifique o nome correto no JSON
+    @JsonProperty("dose_per_hectare")
     private int dosePerHectare;
 
     public ProductThreshold() {

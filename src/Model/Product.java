@@ -12,7 +12,7 @@ public class Product {
     private String name;
 
     @JsonProperty("cost_per_dose")
-    private double costPerDose; // Antes o nome estava diferente
+    private double costPerDose;
 
     @JsonProperty("thresholds")
     private List<ProductThreshold> thresholds;

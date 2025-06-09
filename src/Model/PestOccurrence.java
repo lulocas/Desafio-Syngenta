@@ -9,7 +9,7 @@ public class PestOccurrence {
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("region_id")  // Corrige o nome do campo JSON
+    @JsonProperty("region_id")
     private String regionId;
 
     @JsonProperty("pest_id")

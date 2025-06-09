@@ -11,12 +11,12 @@ public class PestAnalysisService {
     public static void analyzePestOccurrences(List<PestOccurrence> pestOccurrences, List<Product> products, List<Region> regions) {
         Map<String, Integer> pestCountByRegion = new HashMap<>();
 
-        // Contar ocorrências de pragas por região
+
         for (PestOccurrence occurrence : pestOccurrences) {
             pestCountByRegion.put(String.valueOf(occurrence.getRegionId()), pestCountByRegion.getOrDefault(occurrence.getRegionId(), 0) + 1);
         }
 
-        // Determinar quais produtos devem ser aplicados
+
         for (Region region : regions) {
             int pestCount = pestCountByRegion.getOrDefault(region.getId(), 0);
             List<String> recommendedProducts = new ArrayList<>();
@@ -32,7 +32,7 @@ public class PestAnalysisService {
                 }
             }
 
-            // Exibir recomendações para a região
+
             recommendedProducts.forEach(System.out::println);
         }
     }
